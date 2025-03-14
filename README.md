@@ -1,6 +1,6 @@
 # LISK (Linux Init Setup Kit)
 
-[![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 [![GitHub stars](https://img.shields.io/github/stars/MeowLove/LISK.svg)](https://github.com/MeowLove/LISK/stargazers)
 [![GitHub forks](https://img.shields.io/github/forks/MeowLove/LISK.svg)](https://github.com/MeowLove/LISK/network)
 [![GitHub issues](https://img.shields.io/github/issues/MeowLove/LISK.svg)](https://github.com/MeowLove/LISK/issues)
@@ -69,11 +69,11 @@ Quickly initialize and configure your Linux system with LISK: a simple, secure, 
 
 ## 🤝 Contributing
 
-Contributions are welcome!  Please see [CONTRIBUTING.md](CONTRIBUTING.md) for details.  We encourage you to submit issues, feature requests, and pull requests to our [development repository](https://github.com/MeowLove/Linux-Init-Setup-Kit).
+Contributions are welcome!  We encourage you to submit issues, feature requests, and pull requests to our [development repository](https://github.com/MeowLove/Linux-Init-Setup-Kit).  A more detailed contributing guide will be available soon.  (For now, please follow the general guidelines in the development repository's README).
 
 ## 📝 License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the GNU General Public License v3.0 - see the [LICENSE](LICENSE) file for details.
 
 ## 💬 Community
 

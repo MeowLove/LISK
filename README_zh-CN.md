@@ -1,6 +1,6 @@
 # LISK (Linux 系统初始化设置工具箱)
 
-[![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0)
 [![GitHub stars](https://img.shields.io/github/stars/MeowLove/LISK.svg)](https://github.com/MeowLove/LISK/stargazers)
 [![GitHub forks](https://img.shields.io/github/forks/MeowLove/LISK.svg)](https://github.com/MeowLove/LISK/network)
 [![GitHub issues](https://img.shields.io/github/issues/MeowLove/LISK.svg)](https://github.com/MeowLove/LISK/issues)
@@ -69,11 +69,11 @@
 
 ## 🤝 贡献
 
-欢迎贡献！ 请参阅 [CONTRIBUTING.md](CONTRIBUTING.md) 了解详情。我们鼓励您向我们的[开发仓库](https://github.com/MeowLove/Linux-Init-Setup-Kit) 提交问题、功能请求和拉取请求。
+欢迎贡献！我们鼓励您向我们的[开发仓库](https://github.com/MeowLove/Linux-Init-Setup-Kit) 提交问题、功能请求和拉取请求。更详细的贡献指南将很快发布。（目前，请遵循开发仓库 README 中的通用指南）。
 
 ## 📝 许可证
 
-本项目根据 MIT 许可证授权 - 有关详细信息，请参阅 [LICENSE](LICENSE) 文件。
+本项目根据 GNU General Public License v3.0 授权 - 有关详细信息，请参阅 [LICENSE](LICENSE) 文件。
 
 ## 💬 社区
 
