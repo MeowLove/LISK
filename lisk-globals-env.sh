@@ -267,6 +267,16 @@ _lisk_check_internet_connection() {
     return 1 # 如果所有检测都失败，返回 1
 }
 
+# 转义变量值中的特殊字符，以便在 sed 命令中使用
+_lisk_escape_sed() {
+  # 参数：变量名
+  local var_name="$1"
+  local var_value="${!var_name}"
+
+  # 转义 /,\, & 和换行符
+  var_value=$(sed 's/[\/&]/\\&/g; s/\\/\\\\/g; s/\n/\\n/g' <<< "$var_value")
+  printf -v "$var_name" '%s' "$var_value"
+}
 # 参数处理：-a (更新所有推荐值)
 if [ "$1" = "-a" ]; then
   _lisk_update_base_dir
@@ -285,25 +295,35 @@ if [ "$1" = "-a" ]; then
   _lisk_detect_country_code
   _lisk_check_internet_connection
 
-  # 使用 sed 命令更新变量值
-  # 注意：这里需要对特殊字符进行转义，如 $、/、& 等
-  # shellcheck disable=SC2089
-  sed -i "s|LISK_BASE_DIR=.*|LISK_BASE_DIR=\"$LISK_BASE_DIR\"|" "$0"
-  sed -i "s|LISK_DISTRO=.*|LISK_DISTRO=\"$LISK_DISTRO\"|" "$0"
-  sed -i "s|LISK_DISTRO_VERSION=.*|LISK_DISTRO_VERSION=\"$LISK_DISTRO_VERSION\"|" "$0"
-  sed -i "s|LISK_DISTRO_FAMILY=.*|LISK_DISTRO_FAMILY=\"$LISK_DISTRO_FAMILY\"|" "$0"
-  sed -i "s|LISK_KERNEL_VERSION=.*|LISK_KERNEL_VERSION=\"$LISK_KERNEL_VERSION\"|" "$0"
-  sed -i "s|LISK_ARCHITECTURE=.*|LISK_ARCHITECTURE=\"$LISK_ARCHITECTURE\"|" "$0"
-  sed -i "s|LISK_VIRTUALIZATION=.*|LISK_VIRTUALIZATION=\"$LISK_VIRTUALIZATION\"|" "$0"
-  sed -i "s|LISK_TUN_TAP_ENABLED=.*|LISK_TUN_TAP_ENABLED=\"$LISK_TUN_TAP_ENABLED\"|" "$0"
-  sed -i "s|LISK_CLOUD_INIT_ENABLED=.*|LISK_CLOUD_INIT_ENABLED=\"$LISK_CLOUD_INIT_ENABLED\"|" "$0"
-  sed -i "s|LISK_QEMU_GA_ENABLED=.*|LISK_QEMU_GA_ENABLED=\"$LISK_QEMU_GA_ENABLED\"|" "$0"
-  sed -i "s|LISK_IS_CONTAINER=.*|LISK_IS_CONTAINER=\"$LISK_IS_CONTAINER\"|" "$0"
-  sed -i "s|LISK_CPU_MODEL=.*|LISK_CPU_MODEL=\"$LISK_CPU_MODEL\"|" "$0"
-  sed -i "s|LISK_CPU_CORES=.*|LISK_CPU_CORES=\"$LISK_CPU_CORES\"|" "$0"
-  sed -i "s|LISK_MEMORY_TOTAL=.*|LISK_MEMORY_TOTAL=\"$LISK_MEMORY_TOTAL\"|" "$0"
-  sed -i "s|LISK_DISK_TOTAL=.*|LISK_DISK_TOTAL=\"$LISK_DISK_TOTAL\"|" "$0"
-  sed -i "s|LISK_EXTERNAL_IP=.*|LISK_EXTERNAL_IP=\"$LISK_EXTERNAL_IP\"|" "$0"
-  sed -i "s|LISK_COUNTRY_CODE=.*|LISK_COUNTRY_CODE=\"$LISK_COUNTRY_CODE\"|" "$0"
+  # 定义一个包含所有需要更新的全局变量的数组
+  local vars=(
+    LISK_BASE_DIR
+    LISK_DISTRO
+    LISK_DISTRO_VERSION
+    LISK_DISTRO_FAMILY
+    LISK_KERNEL_VERSION
+    LISK_ARCHITECTURE
+    LISK_VIRTUALIZATION
+    LISK_TUN_TAP_ENABLED
+    LISK_CLOUD_INIT_ENABLED
+    LISK_QEMU_GA_ENABLED
+    LISK_IS_CONTAINER
+    LISK_CPU_MODEL
+    LISK_CPU_CORES
+    LISK_MEMORY_TOTAL
+    LISK_DISK_TOTAL
+    LISK_EXTERNAL_IP
+    LISK_COUNTRY_CODE
+  )
+
+  # 循环遍历数组，更新每个变量的值
+  for var in "${vars[@]}"; do
+    _lisk_escape_sed "$var"  # 转义变量值中的特殊字符
+    sed -i "s|$var=.*|$var=\"${!var}\"|" "$0"  || {
+      echo "Error updating variable $var in lisk-globals-env.sh" >&2
+      exit 1
+    }
+  done
+
   exit 0
 fi
